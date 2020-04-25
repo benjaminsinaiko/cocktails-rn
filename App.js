@@ -1,11 +1,36 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 
-export default function App() {
+import { AuthProvider, useAuth } from './src/contexts/authContext';
+import CocktailsListScreen from './src/screens/CocktailListScreen';
+
+const Stack = createStackNavigator();
+
+function App() {
+  const { checkUserAuth } = useAuth();
+
+  useEffect(() => {
+    checkUserAuth();
+  }, []);
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-    </View>
+    <AuthProvider>
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen name='List' component={CocktailsListScreen} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </AuthProvider>
+  );
+}
+
+export default function () {
+  return (
+    <AuthProvider>
+      <App />
+    </AuthProvider>
   );
 }
 
