@@ -1,0 +1,116 @@
+[
+  {
+    "id": "airmail",
+    "garnish": "Lemon twist",
+    "glass": "Collins",
+    "ice": "Cubes",
+    "ingredients": [
+      {
+        "measurement": "oz",
+        "name": "Rum",
+        "quantity": 1.5,
+        "suggested": "Banks Rum"
+      },
+      { "measurement": "oz", "name": "Lemon Juice", "quantity": 0.75 },
+      { "measurement": "oz", "name": "Honey Syrup", "quantity": 0.75 },
+      { "measurement": null, "name": "Champagne", "quantity": null }
+    ],
+    "method": "Shake",
+    "name": "Airmail",
+    "type": "rum-rhum"
+  },
+  {
+    "id": "americano",
+    "garnish": "Lemon twist",
+    "glass": "Rocks",
+    "ice": "Cubes",
+    "ingredients": [
+      { "measurement": "oz", "name": "Campari", "quantity": 1 },
+      {
+        "measurement": "oz",
+        "name": "Sweet Vermouth",
+        "quantity": 1,
+        "suggested": "Punt e Mes"
+      },
+      {
+        "measurement": "oz",
+        "name": "Gin",
+        "quantity": "0.5",
+        "suggested": "Tanqueray Gin"
+      },
+      { "measurement": null, "name": "Soda Water", "quantity": null }
+    ],
+    "method": "Build",
+    "name": "Americano",
+    "type": "gin"
+  },
+  {
+    "id": "any-rug-in-the-house",
+    "garnish": "Lemon peel expressed and discarded",
+    "glass": "Coupe",
+    "ice": "None",
+    "ingredients": [
+      {
+        "measurement": "oz",
+        "name": "Rye",
+        "quantity": 1,
+        "suggested": "Rittenhouse Rye"
+      },
+      {
+        "measurement": "oz",
+        "name": "Dark Rum",
+        "quantity": 1,
+        "suggested": "Coruba Jamaica Rum"
+      },
+      {
+        "measurement": "oz",
+        "name": "Fernet",
+        "quantity": 0.5,
+        "suggested": "Fernet Branca"
+      },
+      {
+        "measurement": "oz",
+        "name": "Zucca",
+        "quantity": 0.5,
+        "suggested": "Zucca Rabarbaro"
+      },
+      {
+        "measurement": "oz",
+        "name": "Absinthe",
+        "quantity": 0.25,
+        "suggested": "Pernod Absinthe"
+      },
+      { "measurement": "oz", "name": "Demerara Syrup", "quantity": 0.125 },
+      { "measurement": "dash", "name": "Angostura Bitters", "quantity": 1 },
+      { "measurement": "dash", "name": "Orange Bitters", "quantity": 1 }
+    ],
+    "method": "Stirred",
+    "name": "Any Rug In The House",
+    "type": "whiskey-whisky"
+  },
+  {
+    "id": "bijou",
+    "garnish": "Cherry and long lemon twist",
+    "glass": "Coupe",
+    "ice": "None",
+    "ingredients": [
+      {
+        "measurement": "oz",
+        "name": "Gin",
+        "quantity": 1,
+        "suggested": "Beefeater Gin"
+      },
+      {
+        "measurement": "oz",
+        "name": "Sweet Vermouth",
+        "quantity": 1,
+        "suggested": "Dolin Vermouth de Chambéry Rouge"
+      },
+      { "measurement": "oz", "name": "Green Chartreuse", "quantity": 1 },
+      { "measurement": "dash", "name": "Champagne", "quantity": 1 }
+    ],
+    "method": "Stirred",
+    "name": "Bijou",
+    "type": "gin"
+  }
+]

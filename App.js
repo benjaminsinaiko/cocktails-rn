@@ -1,44 +1,49 @@
-import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useEffect } from 'react';
+import * as eva from '@eva-design/eva';
+import { ApplicationProvider, IconRegistry } from '@ui-kitten/components';
+import { EvaIconsPack } from '@ui-kitten/eva-icons';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import { AuthProvider, useAuth } from './src/contexts/authContext';
+import { CocktailsProvider } from './src/contexts/cocktailsContext';
 import CocktailsListScreen from './src/screens/CocktailListScreen';
+import CocktailDetailScreen from './src/screens/CocktailDetailScreen';
 
 const Stack = createStackNavigator();
 
-function App() {
-  const { checkUserAuth } = useAuth();
+function AppNavigator() {
+  // const { checkUserAuth } = useAuth();
 
-  useEffect(() => {
-    checkUserAuth();
-  }, []);
+  // useEffect(() => {
+  //   checkUserAuth();
+  // }, []);
 
   return (
-    <AuthProvider>
-      <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen name='List' component={CocktailsListScreen} />
-        </Stack.Navigator>
-      </NavigationContainer>
-    </AuthProvider>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name='All Cocktails' component={CocktailsListScreen} />
+        <Stack.Screen
+          name='Cocktail'
+          component={CocktailDetailScreen}
+          options={({ route }) => ({ title: route.params.name })}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
-export default function () {
+export default function App() {
   return (
-    <AuthProvider>
-      <App />
-    </AuthProvider>
+    <>
+      {/* <AuthProvider> */}
+      {/* <CocktailsProvider> */}
+      <IconRegistry icons={EvaIconsPack} />
+      <ApplicationProvider {...eva} theme={eva.light}>
+        <AppNavigator />
+      </ApplicationProvider>
+      {/* </CocktailsProvider> */}
+      {/* </AuthProvider> */}
+    </>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
