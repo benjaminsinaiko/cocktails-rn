@@ -1,6 +1,6 @@
 import React from 'react';
-import { ImageBackground, View, Image, StyleSheet } from 'react-native';
-import { Card, Text, useTheme } from '@ui-kitten/components';
+import { View, StyleSheet } from 'react-native';
+import { Text, useTheme } from '@ui-kitten/components';
 
 const CocktailHeader = ({ name }) => {
   const theme = useTheme();
@@ -12,7 +12,7 @@ const CocktailHeader = ({ name }) => {
         { backgroundColor: theme['color-warning-default'] },
       ]}
     >
-      <Text category='h3' style={styles.text}>
+      <Text category='h2' style={styles.text}>
         {name}
       </Text>
     </View>

@@ -13,11 +13,11 @@ import CocktailDetailScreen from './src/screens/CocktailDetailScreen';
 const Stack = createStackNavigator();
 
 function AppNavigator() {
-  // const { checkUserAuth } = useAuth();
+  const { checkUserAuth } = useAuth();
 
-  // useEffect(() => {
-  //   checkUserAuth();
-  // }, []);
+  useEffect(() => {
+    checkUserAuth();
+  }, []);
 
   return (
     <NavigationContainer>
@@ -26,7 +26,7 @@ function AppNavigator() {
         <Stack.Screen
           name='Cocktail'
           component={CocktailDetailScreen}
-          options={({ route }) => ({ title: route.params.name })}
+          options={{ title: 'Recipe' }}
         />
       </Stack.Navigator>
     </NavigationContainer>
@@ -36,14 +36,14 @@ function AppNavigator() {
 export default function App() {
   return (
     <>
-      {/* <AuthProvider> */}
-      {/* <CocktailsProvider> */}
-      <IconRegistry icons={EvaIconsPack} />
-      <ApplicationProvider {...eva} theme={eva.light}>
-        <AppNavigator />
-      </ApplicationProvider>
-      {/* </CocktailsProvider> */}
-      {/* </AuthProvider> */}
+      <AuthProvider>
+        <CocktailsProvider>
+          <IconRegistry icons={EvaIconsPack} />
+          <ApplicationProvider {...eva} theme={eva.light}>
+            <AppNavigator />
+          </ApplicationProvider>
+        </CocktailsProvider>
+      </AuthProvider>
     </>
   );
 }

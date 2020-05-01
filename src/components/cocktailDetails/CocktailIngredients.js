@@ -2,13 +2,10 @@ import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { List, Icon, Text, Divider, useTheme } from '@ui-kitten/components';
 
-import sampleCocktails from '../utils/sampleCocktails.json';
-import displayFraction from '../utils/displayFraction';
-import { color } from 'react-native-reanimated';
+import displayFraction from '../../utils/displayFraction';
 
 const CocktailIngredients = ({ ingredients }) => {
   const theme = useTheme();
-  console.log('ingredients', ingredients);
 
   function IngredientItem({ item }) {
     return (
@@ -45,7 +42,7 @@ const CocktailIngredients = ({ ingredients }) => {
               },
             ]}
           >
-            <Text>{displayFraction(item.quantity)}</Text>
+            <Text category='c2'>{displayFraction(item.quantity)}</Text>
           </View>
           <View
             style={[
@@ -56,7 +53,7 @@ const CocktailIngredients = ({ ingredients }) => {
               },
             ]}
           >
-            <Text>{item.measurement}</Text>
+            <Text category='p2'>{item.measurement}</Text>
           </View>
           <View
             style={[

@@ -1,16 +1,14 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
-import { Layout, List, ListItem, Avatar } from '@ui-kitten/components';
+import { StyleSheet, View } from 'react-native';
+import { Layout, List, ListItem, Spinner, Avatar } from '@ui-kitten/components';
 
 import { useCocktails } from '../contexts/cocktailsContext';
 import sampleCocktails from '../utils/sampleCocktails.json';
 
 const CocktailListScreen = ({ navigation }) => {
-  // const {
-  //   state: { cocktails },
-  // } = useCocktails();
-  const cocktails = sampleCocktails;
-  console.log('cocktails', cocktails);
+  const { state } = useCocktails();
+  // const cocktails = sampleCocktails;
+  console.log('state', state);
 
   const glassImage = glassName => () => {
     return (
@@ -30,7 +28,7 @@ const CocktailListScreen = ({ navigation }) => {
         accessoryRight={glassImage(item.glass)}
         onPress={() =>
           navigation.navigate('Cocktail', {
-            name: item.name,
+            cocktailId: item.id,
           })
         }
       />
@@ -39,11 +37,17 @@ const CocktailListScreen = ({ navigation }) => {
 
   return (
     <Layout style={styles.container}>
-      <List
-        keyExtractor={cocktail => cocktail.id}
-        data={cocktails}
-        renderItem={renderListItem}
-      />
+      {state.isLoading ? (
+        <View style={{ alignItems: 'center' }}>
+          <Spinner size='large' status='warning' />
+        </View>
+      ) : (
+        <List
+          keyExtractor={cocktail => cocktail.id}
+          data={state.cocktails}
+          renderItem={renderListItem}
+        />
+      )}
     </Layout>
   );
 };
@@ -51,9 +55,11 @@ const CocktailListScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    width: '100%',
+    justifyContent: 'center',
   },
   item: {
-    marginVertical: 8,
+    marginVertical: 5,
     marginHorizontal: 16,
   },
 });

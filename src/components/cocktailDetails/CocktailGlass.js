@@ -4,11 +4,12 @@ import { Avatar, useTheme } from '@ui-kitten/components';
 
 const CocktailGlass = ({ glass }) => {
   const theme = useTheme();
+
   return (
     <View style={styles.container}>
       <Avatar
-        style={{ tintColor: theme['color-warning-default'] }}
-        source={require(`../icons/${glass}.png`)}
+        style={{ width: '65%', tintColor: theme['color-warning-default'] }}
+        source={require(`../../icons/${glass}.png`)}
       />
     </View>
   );
