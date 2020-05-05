@@ -8,6 +8,7 @@ const CocktailIngredients = ({ ingredients }) => {
   const theme = useTheme();
 
   function IngredientItem({ item }) {
+    console.log(item.quantity);
     return (
       <>
         <View
@@ -15,7 +16,7 @@ const CocktailIngredients = ({ ingredients }) => {
             flex: 1,
             flexDirection: 'row',
             marginHorizontal: 16,
-            height: 60,
+            height: 40,
             flexWrap: 'wrap',
           }}
         >
@@ -39,6 +40,7 @@ const CocktailIngredients = ({ ingredients }) => {
               {
                 flex: 2,
                 alignItems: 'center',
+                color: 'red',
               },
             ]}
           >
@@ -89,8 +91,10 @@ const CocktailIngredients = ({ ingredients }) => {
 
 const styles = StyleSheet.create({
   container: {
-    width: '90%',
+    width: '100%',
+    paddingHorizontal: 10,
     marginBottom: 20,
+    backgroundColor: '#fff',
   },
   mainItemBox: {
     height: 40,

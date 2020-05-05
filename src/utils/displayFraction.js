@@ -27,7 +27,7 @@ export default function displayFraction(number) {
 
   const fraction = getFraction(dec);
 
-  if (number > 1) {
+  if (number >= 1) {
     return `${int} ${fraction}`;
   } else {
     return fraction;
