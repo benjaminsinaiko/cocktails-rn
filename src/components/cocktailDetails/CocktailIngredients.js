@@ -8,7 +8,6 @@ const CocktailIngredients = ({ ingredients }) => {
   const theme = useTheme();
 
   function IngredientItem({ item }) {
-    console.log(item.quantity);
     return (
       <>
         <View
