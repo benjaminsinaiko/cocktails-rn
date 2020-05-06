@@ -1,19 +1,30 @@
 import React from 'react';
 import { StyleSheet, View, ImageBackground } from 'react-native';
-import { Layout, Text, List } from '@ui-kitten/components';
+import { Layout, Text, List, useTheme } from '@ui-kitten/components';
 
 import getGlassIcon from '../../utils/getGlassIcon';
 
 const CocktailListScreen = ({ navigation, cocktails }) => {
+  const theme = useTheme();
+
   function renderItem({ item }) {
-    console.log('item', item.glass);
     const glassImg = getGlassIcon(item.glass);
 
     return (
       <View style={styles.cocktailContainer}>
-        <ImageBackground source={glassImg} style={styles.image} blurRadius={2}>
+        <ImageBackground
+          source={glassImg}
+          style={[
+            styles.image,
+            { backgroundColor: theme['color-primary-200'] },
+          ]}
+          blurRadius={2}
+        >
           <View style={styles.textBox}>
-            <Text category='h5' style={styles.text}>
+            <Text
+              category='h5'
+              style={[styles.text, { color: theme['color-primary-800'] }]}
+            >
               {item.name}
             </Text>
           </View>
@@ -23,7 +34,7 @@ const CocktailListScreen = ({ navigation, cocktails }) => {
   }
 
   return (
-    <Layout style={styles.container}>
+    <Layout style={styles.container} level='4'>
       <List data={cocktails} renderItem={renderItem} horizontal />
     </Layout>
   );
@@ -32,22 +43,19 @@ const CocktailListScreen = ({ navigation, cocktails }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    borderColor: 'blue',
-    borderWidth: 1,
   },
   cocktailContainer: {
     flex: 1,
     width: 150,
     marginRight: 15,
     marginLeft: 5,
-    borderColor: 'orange',
-    borderWidth: 1,
+    borderRadius: 5,
   },
   image: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'lightblue',
+    borderRadius: 10,
   },
   textBox: {
     width: '100%',

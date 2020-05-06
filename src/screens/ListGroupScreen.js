@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { SafeAreaView, ScrollView, View, StyleSheet } from 'react-native';
-import { Layout, Text, Spinner } from '@ui-kitten/components';
+import { SafeAreaView, View, StyleSheet } from 'react-native';
+import { Layout, Text, List, Divider, Spinner } from '@ui-kitten/components';
 
 import { useCocktails } from '../contexts/cocktailsContext';
 import GroupList from '../components/cocktailLists/GroupList';
@@ -21,8 +21,6 @@ const ListGroupScreen = () => {
   const { isLoading, cocktails } = state;
   const [cocktailsByType, setCocktailsByType] = useState(null);
 
-  // console.log('cocktails', groupedCocktails);
-
   useEffect(() => {
     if (!isLoading) {
       const grouped = groupByType(cocktails);
@@ -32,27 +30,31 @@ const ListGroupScreen = () => {
 
   if (!cocktailsByType) {
     return (
-      <SafeAreaView
-        style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
-      >
+      <SafeAreaView style={styles.spinner} size='large'>
         <Spinner />
       </SafeAreaView>
     );
   }
 
+  function renderItem({ item }) {
+    return (
+      <View style={styles.groupContainer}>
+        <Text category='h5' style={styles.groupLabel}>
+          {item[0]}
+        </Text>
+        <GroupList cocktails={item[1]} />
+      </View>
+    );
+  }
+
   return (
-    <SafeAreaView style={styles.container}>
-      <ScrollView showsVerticalScrollIndicator={false}>
-        {cocktailsByType.map(group => (
-          <View key={group[0]} style={styles.groupContainer}>
-            <Text category='h5' style={styles.groupLabel}>
-              {group[0]}
-            </Text>
-            <GroupList cocktails={group[1]} />
-          </View>
-        ))}
-      </ScrollView>
-    </SafeAreaView>
+    <Layout style={styles.container} level='1'>
+      <List
+        data={cocktailsByType}
+        renderItem={renderItem}
+        ItemSeparatorComponent={Divider}
+      />
+    </Layout>
   );
 };
 
@@ -61,13 +63,19 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   groupContainer: {
+    flex: 1,
     height: 175,
     marginVertical: 15,
-    justifyContent: 'center',
+    // justifyContent: 'center',
   },
   groupLabel: {
     paddingLeft: 5,
     paddingBottom: 5,
+  },
+  spinner: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
 
