@@ -5,15 +5,18 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { useTheme } from '@ui-kitten/components';
+import { Entypo } from '@expo/vector-icons';
+import { Feather } from '@expo/vector-icons';
 
 import { useAuth } from '../contexts/authContext';
 import ListAlphaScreen from '../screens/ListAlphaScreen';
 import ListGroupScreen from '../screens/ListGroupScreen';
 import CocktailDetailScreen from '../screens/CocktailDetailScreen';
+import ThemeToggleButton from '../components/ui/ThemeToggleButton';
 
-const DetailsStack = createStackNavigator();
-const MainTabNav = createBottomTabNavigator();
-const ListTab = createMaterialTopTabNavigator();
+const CocktailsStack = createStackNavigator();
+const BottomTabs = createBottomTabNavigator();
+const TopTabs = createMaterialTopTabNavigator();
 
 function ProfileScreen() {
   return (
@@ -23,41 +26,77 @@ function ProfileScreen() {
   );
 }
 
-function ListTabNav() {
+function ShoppingListScreen() {
+  return (
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Text>Shopping List!</Text>
+    </View>
+  );
+}
+
+function TopTabsNav() {
   const theme = useTheme();
   return (
-    <ListTab.Navigator
+    <TopTabs.Navigator
       tabBarOptions={{
         activeTintColor: theme['color-primary-default'],
-        inactiveTintColor: theme['color-primary-300'],
+        inactiveTintColor: theme['color-primary-400'],
         indicatorStyle: {
           backgroundColor: theme['color-primary-default'],
         },
       }}
     >
-      <ListTab.Screen name='By Category' component={ListGroupScreen} />
-      <ListTab.Screen name='A - Z' component={ListAlphaScreen} />
-    </ListTab.Navigator>
+      <TopTabs.Screen name='By Type' component={ListGroupScreen} />
+      <TopTabs.Screen name='A - Z' component={ListAlphaScreen} />
+    </TopTabs.Navigator>
   );
 }
 
-function DetailsStackNav() {
+function HomeTabsNav() {
   const theme = useTheme();
+
   return (
-    <DetailsStack.Navigator
-      screenOptions={{
-        headerTintColor: 'white',
-        headerStyle: { backgroundColor: theme['color-primary-default'] },
+    <BottomTabs.Navigator
+      tabBarOptions={{
+        showIcon: true,
+        activeTintColor: theme['color-primary-default'],
+        inactiveTintColor: theme['color-basic-700'],
       }}
     >
-      <DetailsStack.Screen name='Cocktails' component={ListTabNav} />
-      <DetailsStack.Screen name='Recipe' component={CocktailDetailScreen} />
-    </DetailsStack.Navigator>
+      <BottomTabs.Screen
+        name='Cocktails'
+        component={TopTabsNav}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <Entypo name='drink' size={size} color={color} />
+          ),
+        }}
+      />
+      <BottomTabs.Screen
+        name='Ingredients'
+        component={ShoppingListScreen}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <Entypo name='shopping-basket' size={size} color={color} />
+          ),
+        }}
+      />
+      <BottomTabs.Screen
+        name='Profile'
+        component={ProfileScreen}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <Feather name='user' size={size} color={color} />
+          ),
+        }}
+      />
+    </BottomTabs.Navigator>
   );
 }
 
 export default function AppNavigator() {
   const { checkUserAuth } = useAuth();
+  const theme = useTheme();
 
   useEffect(() => {
     checkUserAuth();
@@ -65,10 +104,16 @@ export default function AppNavigator() {
 
   return (
     <NavigationContainer>
-      <MainTabNav.Navigator>
-        <MainTabNav.Screen name='Home' component={DetailsStackNav} />
-        <MainTabNav.Screen name='Profile' component={ProfileScreen} />
-      </MainTabNav.Navigator>
+      <CocktailsStack.Navigator
+        screenOptions={{
+          headerTintColor: 'white',
+          headerStyle: { backgroundColor: theme['color-primary-default'] },
+          headerRight: () => <ThemeToggleButton />,
+        }}
+      >
+        <CocktailsStack.Screen name='Cocktails' component={HomeTabsNav} />
+        <CocktailsStack.Screen name='Recipe' component={CocktailDetailScreen} />
+      </CocktailsStack.Navigator>
     </NavigationContainer>
   );
 }
