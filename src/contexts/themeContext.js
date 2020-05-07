@@ -3,17 +3,19 @@ import React, { useState, createContext, useContext } from 'react';
 const ThemeContext = createContext();
 
 function ThemeProvider(props) {
-  const [theme, setTheme] = useState('light');
+  const [themeMode, setThemeMode] = useState('dark');
 
   function toggleTheme() {
-    const nextTheme = theme === 'light' ? 'dark' : 'light';
-    setTheme(nextTheme);
+    const nextTheme = themeMode === 'light' ? 'dark' : 'light';
+    setThemeMode(nextTheme);
   }
 
-  return <ThemeContext.Provider value={{ theme, toggleTheme }} {...props} />;
+  return (
+    <ThemeContext.Provider value={{ themeMode, toggleTheme }} {...props} />
+  );
 }
 
-function useTheme() {
+function useThemeContext() {
   const context = useContext(ThemeContext);
   if (context === undefined) {
     throw new Error('useTheme must be used within a ThemeProvider');
@@ -21,4 +23,4 @@ function useTheme() {
   return context;
 }
 
-export { ThemeProvider, useTheme };
+export { ThemeProvider, useThemeContext };

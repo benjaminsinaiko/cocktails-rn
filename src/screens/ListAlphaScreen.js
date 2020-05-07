@@ -42,7 +42,7 @@ const ListAlphaScreen = ({ navigation }) => {
       <ListItem
         style={styles.item}
         title={() => (
-          <TitleText name={item.name} color={theme['color-primary-800']} />
+          <TitleText name={item.name} color={theme['color-primary-600']} />
         )}
         description={item.type}
         accessoryRight={glassImage(item.glass)}

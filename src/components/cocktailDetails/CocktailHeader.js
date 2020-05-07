@@ -9,10 +9,13 @@ const CocktailHeader = ({ name }) => {
     <View
       style={[
         styles.header,
-        { backgroundColor: theme['color-warning-default'] },
+        { backgroundColor: theme['background-basic-color-1'] },
       ]}
     >
-      <Text category='h2' style={styles.text}>
+      <Text
+        category='h2'
+        style={[styles.text, { color: theme['text-primary-color'] }]}
+      >
         {name}
       </Text>
     </View>
@@ -30,7 +33,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   text: {
-    color: '#fff',
     fontWeight: 'bold',
     textAlign: 'center',
   },

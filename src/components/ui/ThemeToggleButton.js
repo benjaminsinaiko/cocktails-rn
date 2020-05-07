@@ -1,16 +1,16 @@
 import React from 'react';
 import { Button, Icon } from '@ui-kitten/components';
 
-import { useTheme } from '../../contexts/themeContext';
+import { useThemeContext } from '../../contexts/themeContext';
 
 const ThemeToggleButton = () => {
-  const { theme, toggleTheme } = useTheme();
+  const { themeMode, toggleTheme } = useThemeContext();
 
   const ToggleIcon = props => (
     <Icon
       {...props}
       fill='#fff'
-      name={theme === 'light' ? 'moon-outline' : 'sun-outline'}
+      name={themeMode === 'light' ? 'moon-outline' : 'sun-outline'}
     />
   );
 

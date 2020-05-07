@@ -1,6 +1,13 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
-import { List, Icon, Text, Divider, useTheme } from '@ui-kitten/components';
+import {
+  List,
+  Icon,
+  Text,
+  Divider,
+  useTheme,
+  Layout,
+} from '@ui-kitten/components';
 
 import displayFraction from '../../utils/displayFraction';
 
@@ -29,7 +36,7 @@ const CocktailIngredients = ({ ingredients }) => {
           >
             <Icon
               name='arrow-right'
-              fill={theme['color-warning-default']}
+              fill={theme['color-primary-default']}
               style={{ width: 15, height: 15 }}
             />
           </View>
@@ -79,21 +86,26 @@ const CocktailIngredients = ({ ingredients }) => {
   }
 
   return (
-    <List
-      style={styles.container}
-      data={ingredients}
-      ItemSeparatorComponent={Divider}
-      renderItem={IngredientItem}
-    />
+    <Layout style={styles.container}>
+      <List
+        style={styles.list}
+        data={ingredients}
+        ItemSeparatorComponent={Divider}
+        renderItem={IngredientItem}
+      />
+    </Layout>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     width: '100%',
-    paddingHorizontal: 10,
     marginBottom: 20,
-    backgroundColor: '#fff',
+  },
+  list: {
+    paddingHorizontal: 10,
+    paddingVertical: 10,
   },
   mainItemBox: {
     height: 40,

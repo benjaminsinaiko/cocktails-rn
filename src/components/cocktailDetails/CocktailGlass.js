@@ -1,6 +1,6 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
-import { Avatar, useTheme } from '@ui-kitten/components';
+import { StyleSheet } from 'react-native';
+import { Layout, Avatar, useTheme } from '@ui-kitten/components';
 
 import getGlassIcon from '../../utils/getGlassIcon';
 
@@ -8,12 +8,16 @@ const CocktailGlass = ({ glassName }) => {
   const theme = useTheme();
 
   return (
-    <View style={styles.container}>
+    <Layout style={styles.container}>
       <Avatar
-        style={{ width: '65%', tintColor: theme['color-warning-default'] }}
+        style={{
+          flex: 1,
+          width: '100%',
+          tintColor: theme['color-primary-default'],
+        }}
         source={getGlassIcon(glassName)}
       />
-    </View>
+    </Layout>
   );
 };
 
@@ -21,9 +25,8 @@ const styles = StyleSheet.create({
   container: {
     alignSelf: 'center',
     alignItems: 'center',
-    backgroundColor: '#fff',
-    paddingVertical: 10,
     width: 75,
+    height: 75,
   },
 });
 

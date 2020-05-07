@@ -31,7 +31,7 @@ const CocktailDetailScreen = ({ route }) => {
   return (
     <Layout style={styles.container}>
       {!cocktail ? (
-        <Spinner size='large' status='warning' />
+        <Spinner size='large' />
       ) : (
         <>
           <CocktailHeader name={cocktail.name} />
@@ -46,7 +46,7 @@ const CocktailDetailScreen = ({ route }) => {
               {
                 width: '45%',
                 marginTop: 10,
-                borderColor: theme['color-warning-200'],
+                borderColor: theme['color-primary-200'],
               },
             ]}
           />
@@ -56,7 +56,7 @@ const CocktailDetailScreen = ({ route }) => {
           <Divider
             style={[
               styles.smallDivider,
-              { borderColor: theme['color-warning-200'] },
+              { borderColor: theme['color-primary-200'] },
             ]}
           />
 
@@ -65,7 +65,7 @@ const CocktailDetailScreen = ({ route }) => {
           <Divider
             style={[
               styles.smallDivider,
-              { borderColor: theme['color-warning-200'] },
+              { borderColor: theme['color-primary-200'] },
             ]}
           />
 
@@ -73,7 +73,7 @@ const CocktailDetailScreen = ({ route }) => {
 
           <Icon
             name='arrow-up-outline'
-            fill={theme['color-warning-default']}
+            fill={theme['color-primary-default']}
             style={{ width: 30, height: 30 }}
           />
         </>

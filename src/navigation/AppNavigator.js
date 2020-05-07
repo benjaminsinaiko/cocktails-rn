@@ -36,6 +36,7 @@ function ShoppingListScreen() {
 
 function TopTabsNav() {
   const theme = useTheme();
+
   return (
     <TopTabs.Navigator
       tabBarOptions={{
@@ -43,6 +44,9 @@ function TopTabsNav() {
         inactiveTintColor: theme['color-primary-400'],
         indicatorStyle: {
           backgroundColor: theme['color-primary-default'],
+        },
+        style: {
+          backgroundColor: theme['background-basic-color-1'],
         },
       }}
     >
