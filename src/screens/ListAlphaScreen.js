@@ -1,24 +1,49 @@
 import React from 'react';
 import { SafeAreaView, StyleSheet } from 'react-native';
-import { Layout, List, ListItem, Avatar, Spinner } from '@ui-kitten/components';
+import {
+  Layout,
+  List,
+  ListItem,
+  Text,
+  Avatar,
+  Spinner,
+  useTheme,
+} from '@ui-kitten/components';
 
 import { useCocktails } from '../contexts/cocktailsContext';
 import getGlassIcon from '../utils/getGlassIcon';
 
 const ListAlphaScreen = ({ navigation }) => {
+  const theme = useTheme();
   const { state } = useCocktails();
 
   const glassImage = glassName => () => {
     return (
-      <Avatar style={{ tintColor: null }} source={getGlassIcon(glassName)} />
+      <Avatar
+        style={{ tintColor: theme['color-primary-default'] }}
+        source={getGlassIcon(glassName)}
+      />
     );
   };
+
+  function TitleText(props) {
+    return (
+      <Text
+        category='s1'
+        style={{ color: props.color, marginHorizontal: 8, marginVertical: 5 }}
+      >
+        {props.name}
+      </Text>
+    );
+  }
 
   function renderListItem({ item }) {
     return (
       <ListItem
         style={styles.item}
-        title={item.name}
+        title={() => (
+          <TitleText name={item.name} color={theme['color-primary-800']} />
+        )}
         description={item.type}
         accessoryRight={glassImage(item.glass)}
         onPress={() =>

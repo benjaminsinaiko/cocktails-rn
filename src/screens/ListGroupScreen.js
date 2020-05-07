@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
   },
   groupContainer: {
     flex: 1,
-    height: 225,
+    height: 200,
     paddingVertical: 5,
   },
   groupLabel: {

@@ -28,15 +28,12 @@ const CocktailListScreen = ({ cocktails }) => {
         <View style={styles.cocktailContainer}>
           <ImageBackground
             source={glassImg}
-            style={[
-              styles.image,
-              { backgroundColor: theme['color-primary-100'] },
-            ]}
+            style={[styles.image, { borderColor: theme['color-primary-300'] }]}
           >
             <View style={styles.textBox}>
               <Text
                 category='h5'
-                style={[styles.text, { color: theme['color-primary-800'] }]}
+                style={[styles.text, { color: theme['color-primary-700'] }]}
               >
                 {item.name}
               </Text>
@@ -60,7 +57,7 @@ const styles = StyleSheet.create({
   },
   cocktailContainer: {
     flex: 1,
-    width: 175,
+    width: 150,
     paddingRight: 15,
     paddingLeft: 5,
     paddingVertical: 15,
@@ -70,6 +67,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 10,
+    borderWidth: 2,
   },
   textBox: {
     width: '100%',

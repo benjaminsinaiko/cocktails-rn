@@ -46,8 +46,8 @@ function TopTabsNav() {
         },
       }}
     >
-      <TopTabs.Screen name='By Type' component={ListGroupScreen} />
       <TopTabs.Screen name='A - Z' component={ListAlphaScreen} />
+      <TopTabs.Screen name='By Type' component={ListGroupScreen} />
     </TopTabs.Navigator>
   );
 }
