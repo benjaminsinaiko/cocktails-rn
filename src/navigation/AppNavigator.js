@@ -4,6 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import { useTheme } from '@ui-kitten/components';
 
 import { useAuth } from '../contexts/authContext';
 import ListAlphaScreen from '../screens/ListAlphaScreen';
@@ -23,8 +24,17 @@ function ProfileScreen() {
 }
 
 function ListTabNav() {
+  const theme = useTheme();
   return (
-    <ListTab.Navigator>
+    <ListTab.Navigator
+      tabBarOptions={{
+        activeTintColor: theme['color-primary-default'],
+        inactiveTintColor: theme['color-primary-300'],
+        indicatorStyle: {
+          backgroundColor: theme['color-primary-default'],
+        },
+      }}
+    >
       <ListTab.Screen name='By Category' component={ListGroupScreen} />
       <ListTab.Screen name='A - Z' component={ListAlphaScreen} />
     </ListTab.Navigator>
@@ -32,8 +42,14 @@ function ListTabNav() {
 }
 
 function DetailsStackNav() {
+  const theme = useTheme();
   return (
-    <DetailsStack.Navigator>
+    <DetailsStack.Navigator
+      screenOptions={{
+        headerTintColor: 'white',
+        headerStyle: { backgroundColor: theme['color-primary-default'] },
+      }}
+    >
       <DetailsStack.Screen name='Cocktails' component={ListTabNav} />
       <DetailsStack.Screen name='Recipe' component={CocktailDetailScreen} />
     </DetailsStack.Navigator>

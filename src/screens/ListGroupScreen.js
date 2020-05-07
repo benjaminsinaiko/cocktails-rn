@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { SafeAreaView, View, StyleSheet } from 'react-native';
-import { Layout, Text, List, Divider, Spinner } from '@ui-kitten/components';
+import { Layout, Text, List, Spinner } from '@ui-kitten/components';
 
 import { useCocktails } from '../contexts/cocktailsContext';
 import GroupList from '../components/cocktailLists/GroupList';
@@ -48,13 +48,11 @@ const ListGroupScreen = () => {
   }
 
   return (
-    <Layout style={styles.container} level='1'>
-      <List
-        data={cocktailsByType}
-        renderItem={renderItem}
-        ItemSeparatorComponent={Divider}
-      />
-    </Layout>
+    <SafeAreaView style={styles.container}>
+      <Layout>
+        <List data={cocktailsByType} renderItem={renderItem} />
+      </Layout>
+    </SafeAreaView>
   );
 };
 
@@ -64,12 +62,11 @@ const styles = StyleSheet.create({
   },
   groupContainer: {
     flex: 1,
-    height: 175,
-    marginVertical: 15,
-    // justifyContent: 'center',
+    height: 225,
+    paddingVertical: 5,
   },
   groupLabel: {
-    paddingLeft: 5,
+    paddingLeft: 10,
     paddingBottom: 5,
   },
   spinner: {

@@ -18,9 +18,8 @@ import CocktailGarnish from '../components/cocktailDetails/CocktailsGarnish';
 
 const CocktailDetailScreen = ({ route }) => {
   const theme = useTheme();
-  const {
-    state: { cocktails },
-  } = useCocktails();
+  const { state } = useCocktails();
+  const { cocktails } = state;
   const { cocktailId } = route.params;
   const [cocktail, setCocktail] = useState(null);
 
