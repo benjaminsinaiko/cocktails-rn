@@ -76,8 +76,12 @@ const CocktailIngredients = ({ ingredients }) => {
         </View>
         {item.suggested ? (
           <View style={styles.suggested}>
-            <Text category='p2' appearance='hint'>
-              Suggeseted: {item.suggested}
+            <Text
+              category='p2'
+              appearance='hint'
+              style={{ fontStyle: 'italic' }}
+            >
+              {item.suggested}
             </Text>
           </View>
         ) : null}

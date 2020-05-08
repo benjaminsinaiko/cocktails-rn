@@ -64,7 +64,10 @@ function HomeTabsNav() {
       tabBarOptions={{
         showIcon: true,
         activeTintColor: theme['color-primary-default'],
-        inactiveTintColor: theme['color-basic-700'],
+        style: {
+          backgroundColor: theme['background-basic-color-1'],
+          borderTopWidth: 0,
+        },
       }}
     >
       <BottomTabs.Screen
