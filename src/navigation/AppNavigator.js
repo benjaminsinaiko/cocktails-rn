@@ -13,6 +13,7 @@ import ListAlphaScreen from '../screens/ListAlphaScreen';
 import ListGroupScreen from '../screens/ListGroupScreen';
 import CocktailDetailScreen from '../screens/CocktailDetailScreen';
 import ThemeToggleButton from '../components/ui/ThemeToggleButton';
+import RandomCocktail from '../components/ui/RandomCocktailButton';
 
 const CocktailsStack = createStackNavigator();
 const BottomTabs = createBottomTabNavigator();
@@ -30,6 +31,7 @@ function ShoppingListScreen() {
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       <Text>Shopping List!</Text>
+      <RandomCocktail />
     </View>
   );
 }
