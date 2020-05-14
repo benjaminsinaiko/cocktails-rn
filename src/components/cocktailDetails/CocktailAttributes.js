@@ -9,14 +9,18 @@ const CocktailAttributes = ({ cocktail }) => {
     <View
       style={[styles.container, { borderColor: theme['color-warning-400'] }]}
     >
+      <View
+        style={[styles.topRow, { borderColor: theme['color-warning-400'] }]}
+      >
+        <Text category='c2' appearance='hint'>
+          Glass: <Text category='c2'>{cocktail.glass}</Text>
+        </Text>
+        <Text category='c2' appearance='hint'>
+          Ice: <Text category='c2'>{cocktail.ice}</Text>
+        </Text>
+      </View>
       <Text category='c2' appearance='hint'>
         Method: <Text category='c2'>{cocktail.method}</Text>
-      </Text>
-      <Text category='c2' appearance='hint'>
-        Glass: <Text category='c2'>{cocktail.glass}</Text>
-      </Text>
-      <Text category='c2' appearance='hint'>
-        Ice: <Text category='c2'>{cocktail.ice}</Text>
       </Text>
     </View>
   );
@@ -24,12 +28,17 @@ const CocktailAttributes = ({ cocktail }) => {
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
+    justifyContent: 'space-evenly',
     alignItems: 'center',
     width: '100%',
-    height: 50,
+    height: 80,
     paddingHorizontal: 10,
+  },
+  topRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
+    width: '100%',
   },
 });
 

@@ -11,7 +11,6 @@ import {
 import { useCocktails } from '../contexts/cocktailsContext';
 import CocktailHeader from '../components/cocktailDetails/CocktailHeader';
 import CocktailGlass from '../components/cocktailDetails/CocktailGlass';
-import CocktailType from '../components/cocktailDetails/CocktailType';
 import CocktailAttributes from '../components/cocktailDetails/CocktailAttributes';
 import CocktailIngredients from '../components/cocktailDetails/CocktailIngredients';
 import CocktailGarnish from '../components/cocktailDetails/CocktailsGarnish';
@@ -34,11 +33,9 @@ const CocktailDetailScreen = ({ route }) => {
         <Spinner size='large' />
       ) : (
         <>
-          <CocktailHeader name={cocktail.name} />
+          <CocktailHeader name={cocktail.name} type={cocktail.type} />
 
           <CocktailGlass glassName={cocktail.glass.toLowerCase()} />
-
-          <CocktailType type={cocktail.type} />
 
           <Divider
             style={[

@@ -117,6 +117,7 @@ export default function AppNavigator() {
         screenOptions={{
           headerTintColor: 'white',
           headerStyle: { backgroundColor: theme['color-primary-default'] },
+          headerTitleAlign: 'center',
           headerRight: () => <ThemeToggleButton />,
         }}
       >
