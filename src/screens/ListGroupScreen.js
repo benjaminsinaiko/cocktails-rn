@@ -3,18 +3,8 @@ import { SafeAreaView, View, StyleSheet } from 'react-native';
 import { Layout, Text, List, Spinner } from '@ui-kitten/components';
 
 import { useCocktails } from '../contexts/cocktailsContext';
+import groupByType from '../utils/groupByType';
 import GroupList from '../components/cocktailLists/GroupList';
-
-function groupByType(cocktails) {
-  return cocktails.reduce((acc, cocktail) => {
-    const key = cocktail.type;
-    if (!acc[key]) {
-      acc[key] = [];
-    }
-    acc[key].push(cocktail);
-    return acc;
-  }, {});
-}
 
 const ListGroupScreen = () => {
   const { state } = useCocktails();
@@ -24,7 +14,7 @@ const ListGroupScreen = () => {
   useEffect(() => {
     if (!isLoading) {
       const grouped = groupByType(cocktails);
-      setCocktailsByType(Object.entries(grouped));
+      setCocktailsByType(grouped);
     }
   }, [isLoading]);
 
