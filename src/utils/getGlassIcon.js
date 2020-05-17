@@ -3,13 +3,15 @@ export default function getGlassIcon(glassName) {
     case 'beer':
       return require('../icons/beer.png');
     case 'champagne':
-      return require('../icons/flute.png');
     case 'flute':
       return require('../icons/flute.png');
     case 'cocktail':
       return require('../icons/cocktail.png');
     case 'collins':
+    case 'chimney':
+    case 'zombie':
       return require('../icons/collins.png');
+    case 'fizz':
     case 'coupe':
       return require('../icons/coupe.png');
     case 'highball':
@@ -19,10 +21,11 @@ export default function getGlassIcon(glassName) {
     case 'margarita':
       return require('../icons/margarita.png');
     case 'rocks':
+    case 'double rocks':
       return require('../icons/rocks.png');
-    case 'wine':
-      return require('../icons/wine.png');
     case 'port':
+    case 'sour':
+    case 'wine':
       return require('../icons/wine.png');
 
     default:
