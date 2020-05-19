@@ -7,13 +7,14 @@ import { createMaterialTopTabNavigator } from '@react-navigation/material-top-ta
 import { useTheme } from '@ui-kitten/components';
 import { Entypo } from '@expo/vector-icons';
 import { Feather } from '@expo/vector-icons';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 import { useAuth } from '../contexts/authContext';
+import FiveOClocktail from '../screens/FiveOClocktail';
 import ListAlphaScreen from '../screens/ListAlphaScreen';
 import ListGroupScreen from '../screens/ListGroupScreen';
 import CocktailDetailScreen from '../screens/CocktailDetailScreen';
 import ThemeToggleButton from '../components/ui/ThemeToggleButton';
-import RandomCocktail from '../components/ui/RandomCocktailButton';
 
 const CocktailsStack = createStackNavigator();
 const BottomTabs = createBottomTabNavigator();
@@ -23,15 +24,6 @@ function ProfileScreen() {
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       <Text>Profile!</Text>
-    </View>
-  );
-}
-
-function ShoppingListScreen() {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Shopping List!</Text>
-      <RandomCocktail />
     </View>
   );
 }
@@ -73,20 +65,24 @@ function HomeTabsNav() {
       }}
     >
       <BottomTabs.Screen
+        name="O'Clocktail"
+        component={FiveOClocktail}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons
+              name='numeric-5-box-multiple-outline'
+              size={size}
+              color={color}
+            />
+          ),
+        }}
+      />
+      <BottomTabs.Screen
         name='Cocktails'
         component={TopTabsNav}
         options={{
           tabBarIcon: ({ color, size }) => (
             <Entypo name='drink' size={size} color={color} />
-          ),
-        }}
-      />
-      <BottomTabs.Screen
-        name='Ingredients'
-        component={ShoppingListScreen}
-        options={{
-          tabBarIcon: ({ color, size }) => (
-            <Entypo name='shopping-basket' size={size} color={color} />
           ),
         }}
       />
