@@ -9,6 +9,8 @@ import {
 } from 'react-native';
 import { Button, Card, Icon, Text, useTheme } from '@ui-kitten/components';
 
+const FilterButton = props => <Icon {...props} name='funnel-outline' />;
+
 const SpiritItem = ({ spiritItem, onSelect }) => {
   const theme = useTheme();
 
@@ -30,19 +32,29 @@ const SpiritItem = ({ spiritItem, onSelect }) => {
   );
 };
 
-const SpiritSelector = ({ spirits, dispatch }) => {
+const SpiritFilter = ({ spirits, dispatch }) => {
   const [modalVisible, setModalVisible] = useState(false);
-  const [previousState, setPreviousState] = useState(spirits);
 
   const handleCancel = () => {
-    dispatch({ type: 'set_previous', payload: previousState });
-    setPreviousState(spirits);
+    dispatch({ type: 'set_previous' });
+    setModalVisible(false);
+  };
+
+  const handleApply = () => {
+    dispatch({ type: 'set_filter' });
     setModalVisible(false);
   };
 
   return (
     <View style={styles.container}>
-      <Button onPress={() => setModalVisible(true)}>Select Spirits</Button>
+      <Button
+        onPress={() => setModalVisible(true)}
+        accessoryLeft={FilterButton}
+        appearance='ghost'
+        size='medium'
+      >
+        Filter
+      </Button>
       <Modal
         animationType='fade'
         visible={modalVisible}
@@ -82,10 +94,14 @@ const SpiritSelector = ({ spirits, dispatch }) => {
 
               <View style={styles.buttonContainer}>
                 <Button
-                  style={styles.modalButtons}
-                  onPress={() => setModalVisible(false)}
+                  style={styles.actionButton}
+                  appearance='outline'
+                  onPress={handleCancel}
                 >
-                  Set Spirits
+                  Cancel
+                </Button>
+                <Button style={styles.actionButton} onPress={handleApply}>
+                  Apply
                 </Button>
               </View>
             </Card>
@@ -121,8 +137,13 @@ const styles = StyleSheet.create({
     width: 300,
   },
   buttonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
     marginTop: 20,
+  },
+  actionButton: {
+    width: '40%',
   },
 });
 
-export default SpiritSelector;
+export default SpiritFilter;
