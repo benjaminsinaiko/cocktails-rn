@@ -14,7 +14,7 @@ import FiveOClocktail from '../screens/FiveOClocktail';
 import ListAlphaScreen from '../screens/ListAlphaScreen';
 import ListGroupScreen from '../screens/ListGroupScreen';
 import CocktailDetailScreen from '../screens/CocktailDetailScreen';
-import ThemeToggleButton from '../components/ui/ThemeToggleButton';
+import ThemeToggleButton from '../components/common/ThemeToggleButton';
 
 const CocktailsStack = createStackNavigator();
 const BottomTabs = createBottomTabNavigator();
