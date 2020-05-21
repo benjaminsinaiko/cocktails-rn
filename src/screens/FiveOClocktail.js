@@ -2,9 +2,12 @@ import React, { useState, useReducer, useEffect } from 'react';
 import { SafeAreaView, View, StyleSheet } from 'react-native';
 import { Layout, Divider, Text, useTheme } from '@ui-kitten/components';
 
+import { useCocktails } from '../contexts/cocktailsContext';
 import SpiritFilter from '../components/pickCocktail/SpiritFilter.js';
-import SpiritCountDisplay from '../components/pickCocktail/SpiritCountDisplay';
-import RandomCocktailButton from '../components/common/RandomCocktailButton';
+import CountDisplay from '../components/pickCocktail/CountDisplay';
+import SelectedSearch from '../components/pickCocktail/SelectedSearch';
+import PickRandomCocktail from '../components/pickCocktail/PickRandomCocktail';
+import { filterByType } from '../utils/filterCocktails';
 import { spiritsObject } from '../utils/spiritsObject';
 
 const spiritsReducer = (state, action) => {
@@ -25,15 +28,21 @@ const spiritsReducer = (state, action) => {
       };
     }
     case 'set_filter': {
+      const selected = state.spirits.filter(
+        spirit => spirit.isSelected === true
+      );
+
       return {
         ...state,
         previous: state.spirits,
+        allSelected: Boolean(selected.length === spiritsObject.length),
       };
     }
     case 'select_all':
       return {
         ...state,
         spirits: spiritsObject,
+        allSelected: true,
       };
     default:
       state;
@@ -43,12 +52,17 @@ const spiritsReducer = (state, action) => {
 const initialState = {
   previous: spiritsObject,
   spirits: spiritsObject,
+  allSelected: true,
 };
 
 const FiveOClocktail = () => {
   const theme = useTheme();
+  const {
+    state: { cocktails },
+  } = useCocktails();
   const [state, dispatch] = useReducer(spiritsReducer, initialState);
   const [selectedSpirits, setSelectedSpirits] = useState([]);
+  const [filteredCocktails, setfilteredCocktails] = useState(cocktails);
 
   useEffect(() => {
     const selected = state.spirits.reduce((acc, spirit) => {
@@ -60,21 +74,36 @@ const FiveOClocktail = () => {
     setSelectedSpirits(selected);
   }, [state.spirits]);
 
+  useEffect(() => {
+    if (state.allSelected) {
+      setfilteredCocktails(cocktails);
+    } else {
+      const filtered = filterByType(cocktails, selectedSpirits);
+      setfilteredCocktails(filtered);
+    }
+  }, [selectedSpirits, cocktails, state.allSelected]);
+
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <Layout style={styles.container}>
         <View style={styles.filterContainer}>
           <SpiritFilter spirits={state.spirits} dispatch={dispatch} />
-          <SpiritCountDisplay
-            total={state.spirits.length}
+          <CountDisplay
+            allSelected={state.allSelected}
             selected={selectedSpirits.length}
+            filteredCocktails={filteredCocktails}
           />
         </View>
         <Divider
           style={[styles.divider, { borderColor: theme['text-primary-color'] }]}
         />
-        <Text category='h1'>Random Cocktail</Text>
-        <RandomCocktailButton />
+        <View style={styles.searchContainer}>
+          <SelectedSearch filteredCocktails={filteredCocktails} />
+          <Text category='h5' appearance='hint'>
+            or
+          </Text>
+          <PickRandomCocktail filteredCocktails={filteredCocktails} />
+        </View>
       </Layout>
     </SafeAreaView>
   );
@@ -91,8 +120,11 @@ const styles = StyleSheet.create({
   },
   divider: {
     borderWidth: 1,
-    width: '80%',
+    width: '40%',
     marginVertical: 30,
+  },
+  searchContainer: {
+    alignItems: 'center',
   },
 });
 
