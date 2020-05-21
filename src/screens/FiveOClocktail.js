@@ -5,7 +5,7 @@ import { Layout, Divider, Text, useTheme } from '@ui-kitten/components';
 import { useCocktails } from '../contexts/cocktailsContext';
 import SpiritFilter from '../components/pickCocktail/SpiritFilter.js';
 import CountDisplay from '../components/pickCocktail/CountDisplay';
-import SelectedSearch from '../components/pickCocktail/SelectedSearch';
+import FilteredSearch from '../components/pickCocktail/FilteredSearch';
 import PickRandomCocktail from '../components/pickCocktail/PickRandomCocktail';
 import { filterByType } from '../utils/filterCocktails';
 import { spiritsObject } from '../utils/spiritsObject';
@@ -98,7 +98,10 @@ const FiveOClocktail = () => {
           style={[styles.divider, { borderColor: theme['text-primary-color'] }]}
         />
         <View style={styles.searchContainer}>
-          <SelectedSearch filteredCocktails={filteredCocktails} />
+          <FilteredSearch
+            cocktails={filteredCocktails}
+            spirits={selectedSpirits}
+          />
           <Text category='h5' appearance='hint'>
             or
           </Text>

@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigation } from '@react-navigation/native';
 import { View, StyleSheet } from 'react-native';
 import { Text, Icon, Button } from '@ui-kitten/components';
 
@@ -6,7 +7,16 @@ const GoIcon = props => {
   return <Icon {...props} name='arrow-circle-right-outline' />;
 };
 
-const SelectedSearch = ({ filteredCocktails }) => {
+const FilteredSearch = ({ cocktails, spirits }) => {
+  const navigation = useNavigation();
+
+  const handlePress = () => {
+    navigation.navigate('Filtered', {
+      cocktails,
+      spirits,
+    });
+  };
+
   return (
     <View style={styles.container}>
       <Text category='h5'>See Some Cocktials</Text>
@@ -15,6 +25,7 @@ const SelectedSearch = ({ filteredCocktails }) => {
         accessoryRight={GoIcon}
         appearance='ghost'
         size='giant'
+        onPress={handlePress}
       >
         Search
       </Button>
@@ -32,4 +43,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SelectedSearch;
+export default FilteredSearch;

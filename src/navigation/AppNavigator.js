@@ -13,9 +13,11 @@ import { useAuth } from '../contexts/authContext';
 import FiveOClocktail from '../screens/FiveOClocktail';
 import ListAlphaScreen from '../screens/ListAlphaScreen';
 import ListGroupScreen from '../screens/ListGroupScreen';
+import FilteredCocktails from '../screens/FilteredCocktails';
 import CocktailDetailScreen from '../screens/CocktailDetailScreen';
 import ThemeToggleButton from '../components/common/ThemeToggleButton';
 
+const FilterStack = createStackNavigator();
 const CocktailsStack = createStackNavigator();
 const BottomTabs = createBottomTabNavigator();
 const TopTabs = createMaterialTopTabNavigator();
@@ -25,6 +27,14 @@ function ProfileScreen() {
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       <Text>Profile!</Text>
     </View>
+  );
+}
+
+function FilterStackNav() {
+  return (
+    <FilterStack.Navigator headerMode='none'>
+      <FilterStack.Screen name='Finder' component={FiveOClocktail} />
+    </FilterStack.Navigator>
   );
 }
 
@@ -117,7 +127,8 @@ export default function AppNavigator() {
           headerRight: () => <ThemeToggleButton />,
         }}
       >
-        <CocktailsStack.Screen name='Cocktails' component={HomeTabsNav} />
+        <CocktailsStack.Screen name='FiveOClocktail' component={HomeTabsNav} />
+        <CocktailsStack.Screen name='Filtered' component={FilteredCocktails} />
         <CocktailsStack.Screen name='Recipe' component={CocktailDetailScreen} />
       </CocktailsStack.Navigator>
     </NavigationContainer>
