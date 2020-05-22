@@ -6,17 +6,15 @@ import { useCocktails } from '../contexts/cocktailsContext';
 import groupByType from '../utils/groupByType';
 import GroupList from '../components/cocktailLists/GroupList';
 
-const ListGroupScreen = () => {
+const ListGroupTab = () => {
   const { state } = useCocktails();
-  const { isLoading, cocktails } = state;
+  const { cocktails } = state;
   const [cocktailsByType, setCocktailsByType] = useState(null);
 
   useEffect(() => {
-    if (!isLoading) {
-      const grouped = groupByType(cocktails);
-      setCocktailsByType(grouped);
-    }
-  }, [isLoading]);
+    const grouped = groupByType(cocktails);
+    setCocktailsByType(grouped);
+  }, []);
 
   if (!cocktailsByType) {
     return (
@@ -66,4 +64,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ListGroupScreen;
+export default ListGroupTab;

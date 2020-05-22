@@ -1,6 +1,8 @@
 import React, { useReducer, useEffect, createContext, useContext } from 'react';
 import firebase from '../utils/firebase';
 
+import FullPageSpinner from '../components/common/FullPageSpinner';
+
 const db = firebase.firestore();
 
 const CocktailsContext = createContext();
@@ -60,6 +62,10 @@ function CocktailsProvider(props) {
     } catch (err) {
       dispatch({ type: 'fetch_cocktails_error', payload: err });
     }
+  }
+
+  if (state.isLoading) {
+    return <FullPageSpinner />;
   }
 
   return (

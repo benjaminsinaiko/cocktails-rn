@@ -11,13 +11,12 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 import { useAuth } from '../contexts/authContext';
 import FiveOClocktail from '../screens/FiveOClocktail';
-import ListAlphaScreen from '../screens/ListAlphaScreen';
-import ListGroupScreen from '../screens/ListGroupScreen';
+import ListAlphaTab from '../screens/ListAlphaTab';
+import ListGroupTab from '../screens/ListGroupTab';
 import FilteredCocktails from '../screens/FilteredCocktails';
 import CocktailDetailScreen from '../screens/CocktailDetailScreen';
 import ThemeToggleButton from '../components/common/ThemeToggleButton';
 
-const FilterStack = createStackNavigator();
 const CocktailsStack = createStackNavigator();
 const BottomTabs = createBottomTabNavigator();
 const TopTabs = createMaterialTopTabNavigator();
@@ -27,14 +26,6 @@ function ProfileScreen() {
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       <Text>Profile!</Text>
     </View>
-  );
-}
-
-function FilterStackNav() {
-  return (
-    <FilterStack.Navigator headerMode='none'>
-      <FilterStack.Screen name='Finder' component={FiveOClocktail} />
-    </FilterStack.Navigator>
   );
 }
 
@@ -54,8 +45,8 @@ function TopTabsNav() {
         },
       }}
     >
-      <TopTabs.Screen name='A - Z' component={ListAlphaScreen} />
-      <TopTabs.Screen name='By Type' component={ListGroupScreen} />
+      <TopTabs.Screen name='A - Z' component={ListAlphaTab} />
+      <TopTabs.Screen name='By Type' component={ListGroupTab} />
     </TopTabs.Navigator>
   );
 }

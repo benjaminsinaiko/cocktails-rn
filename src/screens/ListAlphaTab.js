@@ -6,14 +6,13 @@ import {
   ListItem,
   Text,
   Avatar,
-  Spinner,
   useTheme,
 } from '@ui-kitten/components';
 
 import { useCocktails } from '../contexts/cocktailsContext';
 import getGlassIcon from '../utils/getGlassIcon';
 
-const ListAlphaScreen = ({ navigation }) => {
+const ListAlphaTab = ({ navigation }) => {
   const theme = useTheme();
   const { state } = useCocktails();
 
@@ -57,19 +56,13 @@ const ListAlphaScreen = ({ navigation }) => {
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      {state.isLoading ? (
-        <Layout style={styles.spinner}>
-          <Spinner />
-        </Layout>
-      ) : (
-        <Layout style={styles.container}>
-          <List
-            keyExtractor={cocktail => cocktail.id}
-            data={state.cocktails}
-            renderItem={renderListItem}
-          />
-        </Layout>
-      )}
+      <Layout style={styles.container}>
+        <List
+          keyExtractor={cocktail => cocktail.id}
+          data={state.cocktails}
+          renderItem={renderListItem}
+        />
+      </Layout>
     </SafeAreaView>
   );
 };
@@ -91,4 +84,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ListAlphaScreen;
+export default ListAlphaTab;
