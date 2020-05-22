@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import { View, Text } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -13,6 +12,7 @@ import { useAuth } from '../contexts/authContext';
 import FiveOClocktail from '../screens/FiveOClocktail';
 import ListAlphaTab from '../screens/ListAlphaTab';
 import ListGroupTab from '../screens/ListGroupTab';
+import Profile from '../screens/Profile';
 import FilteredCocktails from '../screens/FilteredCocktails';
 import CocktailDetailScreen from '../screens/CocktailDetailScreen';
 import ThemeToggleButton from '../components/common/ThemeToggleButton';
@@ -37,14 +37,6 @@ function getHeaderTitle(route) {
     default:
       "5 O'Clocktails";
   }
-}
-
-function ProfileScreen() {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Profile!</Text>
-    </View>
-  );
 }
 
 function TopTabsNav() {
@@ -115,7 +107,7 @@ function HomeTabsNav({}) {
       />
       <BottomTabs.Screen
         name='Profile'
-        component={ProfileScreen}
+        component={Profile}
         options={{
           tabBarIcon: ({ color, size }) => (
             <Feather name='user' size={size} color={color} />
