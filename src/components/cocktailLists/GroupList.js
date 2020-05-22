@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import { Text, List, useTheme } from '@ui-kitten/components';
 
+import CocktailCard from '../common/CocktailCard';
 import getGlassIcon from '../../utils/getGlassIcon';
 
 const CocktailListScreen = ({ cocktails }) => {
@@ -51,7 +52,18 @@ const CocktailListScreen = ({ cocktails }) => {
 
   return (
     <View style={styles.container} level='4'>
-      <List data={cocktails} renderItem={renderItem} horizontal />
+      <List
+        data={cocktails}
+        renderItem={({ item }) => (
+          <CocktailCard
+            header={''}
+            glassName={item.glass}
+            footer={item.name}
+            cocktailId={item.id}
+          />
+        )}
+        horizontal
+      />
     </View>
   );
 };

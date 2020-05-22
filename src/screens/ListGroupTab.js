@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
   },
   groupContainer: {
     flex: 1,
-    height: 200,
+    height: 245,
     paddingVertical: 5,
   },
   groupLabel: {

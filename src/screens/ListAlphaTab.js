@@ -77,11 +77,6 @@ const styles = StyleSheet.create({
     marginVertical: 5,
     marginHorizontal: 15,
   },
-  spinner: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
 });
 
 export default ListAlphaTab;
