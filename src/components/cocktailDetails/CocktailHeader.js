@@ -15,6 +15,8 @@ const CocktailHeader = ({ name, type }) => {
       <Text
         category='h2'
         style={[styles.text, { color: theme['text-primary-color'] }]}
+        numberOfLines={2}
+        adjustsFontSizeToFit
       >
         {name}
       </Text>
@@ -32,7 +34,7 @@ const CocktailHeader = ({ name, type }) => {
 const styles = StyleSheet.create({
   header: {
     height: 150,
-    width: '100%',
+    width: '75%',
     padding: 15,
     marginHorizontal: -24,
     marginVertical: -16,

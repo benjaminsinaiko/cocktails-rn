@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet } from 'react-native';
+import { SafeAreaView, StyleSheet } from 'react-native';
 import {
   Layout,
   Divider,
@@ -9,6 +9,7 @@ import {
 } from '@ui-kitten/components';
 
 import { useCocktails } from '../contexts/cocktailsContext';
+import FullPageSpinner from '../components/common/FullPageSpinner';
 import CocktailHeader from '../components/cocktailDetails/CocktailHeader';
 import CocktailGlass from '../components/cocktailDetails/CocktailGlass';
 import CocktailAttributes from '../components/cocktailDetails/CocktailAttributes';
@@ -27,55 +28,57 @@ const CocktailDetailScreen = ({ route }) => {
     setCocktail(cocktailData);
   }, [cocktails]);
 
+  if (!cocktail) {
+    return <FullPageSpinner />;
+  }
+
   return (
-    <Layout style={styles.container}>
-      {!cocktail ? (
-        <Spinner size='large' />
-      ) : (
-        <>
-          <CocktailHeader name={cocktail.name} type={cocktail.type} />
+    <SafeAreaView
+      style={{ flex: 1, backgroundColor: theme['background-basic-color-1'] }}
+    >
+      <Layout style={styles.container}>
+        <CocktailHeader name={cocktail.name} type={cocktail.type} />
 
-          <CocktailGlass glassName={cocktail.glass.toLowerCase()} />
+        <CocktailGlass glassName={cocktail.glass.toLowerCase()} />
 
-          <Divider
-            style={[
-              styles.divider,
-              {
-                width: '45%',
-                marginTop: 10,
-                borderColor: theme['color-primary-200'],
-              },
-            ]}
-          />
+        <Divider
+          style={[
+            styles.divider,
+            {
+              width: '45%',
+              marginTop: 10,
+              borderColor: theme['color-primary-200'],
+            },
+          ]}
+        />
 
-          <CocktailAttributes cocktail={cocktail} />
+        <CocktailAttributes cocktail={cocktail} />
 
-          <Divider
-            style={[
-              styles.smallDivider,
-              { borderColor: theme['color-primary-200'] },
-            ]}
-          />
+        <Divider
+          style={[
+            styles.smallDivider,
+            { borderColor: theme['color-primary-200'] },
+          ]}
+        />
 
-          <CocktailIngredients ingredients={cocktail.ingredients} />
+        <CocktailIngredients ingredients={cocktail.ingredients} />
 
-          <Divider
-            style={[
-              styles.smallDivider,
-              { borderColor: theme['color-primary-200'] },
-            ]}
-          />
+        <Divider
+          style={[
+            styles.smallDivider,
+            { borderColor: theme['color-primary-200'] },
+          ]}
+        />
 
-          <CocktailGarnish garnish={cocktail.garnish} />
+        <CocktailGarnish garnish={cocktail.garnish} />
 
-          <Icon
-            name='arrow-up-outline'
-            fill={theme['color-primary-default']}
-            style={{ width: 30, height: 30 }}
-          />
-        </>
-      )}
-    </Layout>
+        <Icon
+          name='arrow-up-outline'
+          fill={theme['color-primary-default']}
+          style={{ width: 30, height: 30 }}
+        />
+      </Layout>
+    </SafeAreaView>
   );
 };
 
@@ -84,7 +87,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    paddingBottom: 20,
   },
   divider: {
     borderWidth: 1,

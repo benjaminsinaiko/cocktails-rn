@@ -21,6 +21,24 @@ const CocktailsStack = createStackNavigator();
 const BottomTabs = createBottomTabNavigator();
 const TopTabs = createMaterialTopTabNavigator();
 
+function getHeaderTitle(route) {
+  const routeName = route.state
+    ? route.state.routes[route.state.index].name
+    : route.params?.screen || "5 O'Clocktail";
+
+  switch (routeName) {
+    case 'Find':
+      return "5 O'Clocktails";
+    case 'Cocktails':
+      return 'Cocktails';
+    case 'Profile':
+      return 'Profile';
+
+    default:
+      "5 O'Clocktails";
+  }
+}
+
 function ProfileScreen() {
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
@@ -45,13 +63,21 @@ function TopTabsNav() {
         },
       }}
     >
-      <TopTabs.Screen name='A - Z' component={ListAlphaTab} />
-      <TopTabs.Screen name='By Type' component={ListGroupTab} />
+      <TopTabs.Screen
+        name='Alpha'
+        component={ListAlphaTab}
+        options={{ title: 'A - Z' }}
+      />
+      <TopTabs.Screen
+        name='Group'
+        component={ListGroupTab}
+        options={{ title: 'Spirit Type' }}
+      />
     </TopTabs.Navigator>
   );
 }
 
-function HomeTabsNav() {
+function HomeTabsNav({}) {
   const theme = useTheme();
 
   return (
@@ -66,7 +92,7 @@ function HomeTabsNav() {
       }}
     >
       <BottomTabs.Screen
-        name="O'Clocktail"
+        name='Find'
         component={FiveOClocktail}
         options={{
           tabBarIcon: ({ color, size }) => (
@@ -112,15 +138,35 @@ export default function AppNavigator() {
     <NavigationContainer>
       <CocktailsStack.Navigator
         screenOptions={{
-          headerTintColor: 'white',
+          headerTintColor: '#fff',
           headerStyle: { backgroundColor: theme['color-primary-default'] },
           headerTitleAlign: 'center',
           headerRight: () => <ThemeToggleButton />,
         }}
       >
-        <CocktailsStack.Screen name='FiveOClocktail' component={HomeTabsNav} />
-        <CocktailsStack.Screen name='Filtered' component={FilteredCocktails} />
-        <CocktailsStack.Screen name='Recipe' component={CocktailDetailScreen} />
+        <CocktailsStack.Screen
+          name='Home'
+          component={HomeTabsNav}
+          options={({ route }) => ({
+            headerTitle: getHeaderTitle(route),
+          })}
+        />
+        <CocktailsStack.Screen
+          name='Filtered'
+          component={FilteredCocktails}
+          options={{
+            headerBackTitle: 'Back',
+          }}
+        />
+        <CocktailsStack.Screen
+          name='Recipe'
+          component={CocktailDetailScreen}
+          options={{
+            title: null,
+            headerBackTitleVisible: false,
+            headerTransparent: true,
+          }}
+        />
       </CocktailsStack.Navigator>
     </NavigationContainer>
   );
